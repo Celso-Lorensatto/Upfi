@@ -37,6 +37,7 @@ export const theme = extendTheme({
       body: {
         bg: 'pGray.900',
         color: 'pGray.50',
+        overflow: 'overlay',
       },
     },
   },

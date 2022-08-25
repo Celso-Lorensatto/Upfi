@@ -4,9 +4,9 @@ import { useInfiniteQuery } from 'react-query';
 
 import { Header } from '../components/Header';
 import { CardList } from '../components/CardList';
-import { api } from '../services/api';
 import { Loading } from '../components/Loading';
 import { Error } from '../components/Error';
+import { api } from '../services/api';
 
 export default function Home(): JSX.Element {
   const {
@@ -18,26 +18,66 @@ export default function Home(): JSX.Element {
     hasNextPage,
   } = useInfiniteQuery(
     'images',
-    // TODO AXIOS REQUEST WITH PARAM
-    ,
-    // TODO GET AND RETURN NEXT PAGE PARAM
+    ({ pageParam = null }) => {
+      const request = `/api/images${
+        !pageParam || pageParam == 'next-cursor' ? '' : '?after=' + pageParam
+      }`;
+      return api.get(request);
+    },
+    {
+      getNextPageParam: lastPage => {
+        return lastPage.data.after || null;
+      },
+    }
   );
 
+  type Card = {
+    title: string;
+    description: string;
+    url: string;
+    ts: number;
+    id: string;
+  };
+
   const formattedData = useMemo(() => {
-    // TODO FORMAT AND FLAT DATA ARRAY
+    const dados = [];
+    data?.pages.forEach(page => {
+      page.data.data.forEach(data => {
+        dados.push({
+          url: data.url,
+          title: data.title,
+          description: data.description,
+          ts: data.ts,
+          id: data.id,
+        });
+      });
+    });
+    console.log(dados);
+    return dados;
   }, [data]);
 
   // TODO RENDER LOADING SCREEN
-
+  if (isLoading) {
+    return <Loading />;
+  }
   // TODO RENDER ERROR SCREEN
+  if (isError) {
+    return <Error />;
+  }
 
   return (
     <>
       <Header />
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
-        <CardList cards={formattedData} />
-        {/* TODO RENDER LOAD MORE BUTTON IF DATA HAS NEXT PAGE */}
+        {!isLoading && !isError && <CardList cards={formattedData} />}
+        {hasNextPage ? (
+          <Button marginTop="2rem" onClick={fetchNextPage} type="button">
+            {isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}
+          </Button>
+        ) : (
+          ''
+        )}
       </Box>
     </>
   );

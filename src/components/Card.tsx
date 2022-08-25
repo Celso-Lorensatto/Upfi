@@ -5,6 +5,8 @@ import {
   Image,
   Skeleton,
   SkeletonText,
+  useMediaQuery,
+  Flex,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
@@ -23,21 +25,46 @@ interface CardProps {
 export function Card({ data, viewImage }: CardProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
 
+  const isChrome = navigator.userAgent.match(/chrome|chromium|crios/i);
+
   return (
     <Box key={data.ts} borderRadius="md" bgColor="pGray.800">
-      <Skeleton isLoaded={!isLoading}>
-        <Image
-          src={data.url}
-          alt={data.title}
-          objectFit="cover"
-          w="max"
-          h={48}
-          borderTopRadius="md"
-          onClick={() => viewImage(data.url)}
-          onLoad={() => setIsLoading(false)}
-          cursor="pointer"
-        />
-      </Skeleton>
+      {!!isChrome ? (
+        <Skeleton isLoaded={!isLoading}>
+          <Flex
+            h={48}
+            alignItems="center"
+            borderTopRadius="md"
+            overflow="hidden"
+          >
+            <Image
+              src={data.url}
+              alt={data.title}
+              minHeight="100%"
+              minWidth="100%"
+              w="auto"
+              h="auto"
+              onClick={() => viewImage(data.url)}
+              onLoad={() => setIsLoading(false)}
+              cursor="pointer"
+            />
+          </Flex>
+        </Skeleton>
+      ) : (
+        <Skeleton isLoaded={!isLoading}>
+          <Image
+            src={data.url}
+            alt={data.title}
+            objectFit="cover"
+            w="max"
+            h={48}
+            borderTopRadius="md"
+            onClick={() => viewImage(data.url)}
+            onLoad={() => setIsLoading(false)}
+            cursor="pointer"
+          />
+        </Skeleton>
+      )}
 
       <Box pt={5} pb={4} px={6}>
         {isLoading ? (
