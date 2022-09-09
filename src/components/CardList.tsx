@@ -1,4 +1,4 @@
-import { Grid, SimpleGrid, useDisclosure } from '@chakra-ui/react';
+import { Grid, useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Card } from './Card';
 import { ModalViewImage } from './Modal/ViewImage';
@@ -29,7 +29,11 @@ export function CardList({ cards }: CardsProps): JSX.Element {
   }
 
   return (
-    <Grid templateColumns="1fr 1fr 1fr" alignItems="center" gap="40px">
+    <Grid
+      templateColumns={['1fr', '1fr 1fr', '1fr 1fr', '1fr 1fr 1fr']}
+      alignItems="center"
+      gap="40px"
+    >
       {cards.map(card => {
         return <Card key={card.id} viewImage={viewImage} data={card} />;
       })}

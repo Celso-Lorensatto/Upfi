@@ -5,7 +5,6 @@ import {
   Image,
   Skeleton,
   SkeletonText,
-  useMediaQuery,
   Flex,
 } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -74,8 +73,8 @@ export function Card({ data, viewImage }: CardProps): JSX.Element {
           </>
         ) : (
           <>
-            <Heading fontSize="2xl">{data.title}</Heading>
-            <Text mt={2.5} fontSize="md">
+            <Heading fontSize={['md', 'lg', '2xl']}>{data.title}</Heading>
+            <Text mt={2.5} fontSize={['sm', 'md', 'lg']}>
               {data.description}
             </Text>
           </>

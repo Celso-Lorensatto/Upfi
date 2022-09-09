@@ -1,6 +1,11 @@
 import { extendTheme } from '@chakra-ui/react';
 
 export const theme = extendTheme({
+  breakpoints: {
+    sm: '33em',
+    md: '44em',
+    lg: '59em',
+  },
   colors: {
     pGray: {
       '50': '#F3F2F2',
@@ -22,7 +27,6 @@ export const theme = extendTheme({
   components: {
     Text: {
       baseStyle: {
-        fontSize: 'lg',
         fontWeight: 'normal',
       },
     },
@@ -38,6 +42,7 @@ export const theme = extendTheme({
         bg: 'pGray.900',
         color: 'pGray.50',
         overflow: 'overlay',
+        fontSize: ['62.5%', '70%', '100%'],
       },
     },
   },

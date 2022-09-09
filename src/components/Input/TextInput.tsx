@@ -1,3 +1,4 @@
+import { Box, useMediaQuery } from '@chakra-ui/react';
 import { forwardRef, ForwardRefRenderFunction } from 'react';
 import { FieldError, FieldErrorsImpl } from 'react-hook-form';
 import {
@@ -19,6 +20,7 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { name, error = null, ...rest },
   ref
 ) => {
+  const [mobile] = useMediaQuery('(max-width:33em)');
   return (
     <FormControl
       display="flex"
@@ -30,6 +32,7 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         aria-label={name}
         name={name}
         ref={ref}
+        autoComplete="off"
         borderColor="transparent"
         bgColor="pGray.800"
         color="pGray.50"
@@ -44,12 +47,18 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         {...rest}
       />
 
-      {!!error && (
-        <Tooltip label={error.message} bg="red.500">
-          <FormErrorMessage ml={-6} mt={0} zIndex="tooltip">
-            <Icon as={FiAlertCircle} color="red.500" w={4} h={4} />
-          </FormErrorMessage>
-        </Tooltip>
+      {mobile ? (
+        <></>
+      ) : (
+        <>
+          {!!error && (
+            <Tooltip label={error.message} bg="red.500">
+              <FormErrorMessage ml={-6} mt={0} zIndex="tooltip">
+                <Icon as={FiAlertCircle} color="red.500" w={4} h={4} />
+              </FormErrorMessage>
+            </Tooltip>
+          )}
+        </>
       )}
     </FormControl>
   );
