@@ -10,6 +10,7 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
+import { FormEvent, ReactEventHandler } from 'react';
 import { TextInput } from '../Input/TextInput';
 
 interface ModalViewImageProps {
@@ -45,6 +46,8 @@ export function ModalViewImage({
             <TextInput
               marginRight={2}
               padding="0"
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               disabled
               cursor="text"
               w="100%"
@@ -58,8 +61,8 @@ export function ModalViewImage({
               outline="solid 1px currentColor"
               color="black"
               _hover={{ color: '#dd6b20', outlineColor: '#dd6b20' }}
-              onClick={e => {
-                const element = e.target.closest('button');
+              onClick={(e: FormEvent) => {
+                const element = (e.target as HTMLElement).closest('button');
                 const icon = element.firstChild.firstChild;
 
                 if (navigator.userAgent.match(/android/i)) {
@@ -74,7 +77,10 @@ export function ModalViewImage({
                 }
                 element.style.color = 'white';
                 element.style.backgroundColor = '#40c057';
-                icon.setAttribute('xlink:href', 'img/sprite.svg#icon-check');
+                (icon as HTMLElement).setAttribute(
+                  'xlink:href',
+                  'img/sprite.svg#icon-check'
+                );
               }}
             >
               <svg fill="currentColor" color="inherit" width="1.5rem">

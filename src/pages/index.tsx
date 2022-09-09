@@ -20,6 +20,7 @@ export default function Home(): JSX.Element {
     'images',
     ({ pageParam = null }) => {
       const request = `/api/images${
+        //@ts-ignore
         !pageParam || pageParam == 'next-cursor' ? '' : '?after=' + pageParam
       }`;
       return api.get(request);

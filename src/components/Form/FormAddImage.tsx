@@ -11,6 +11,16 @@ interface FormAddImageProps {
   closeModal: () => void;
 }
 
+interface dataProps {
+  title: string;
+  description: string;
+}
+
+interface imageMutationProps {
+  data: dataProps;
+  img: string;
+}
+
 export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const [imageUrl, setImageUrl] = useState('');
   const [localImageUrl, setLocalImageUrl] = useState('');
@@ -46,7 +56,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
 
   const queryClient = useQueryClient();
   const mutation = useMutation(
-    ({ data, img }) =>
+    ({ data, img }: imageMutationProps) =>
       api.post('api/images', {
         title: data.title,
         description: data.description,
@@ -61,7 +71,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
     useForm();
   const { errors } = formState;
 
-  const onSubmit = async (data: Record<string, unknown>): Promise<void> => {
+  const onSubmit = async (data: dataProps): Promise<void> => {
     try {
       if (!imageUrl) {
         toast({
