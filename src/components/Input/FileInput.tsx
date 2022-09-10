@@ -13,6 +13,7 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import axios, { AxiosRequestConfig, CancelTokenSource } from 'axios';
+import useTranslation from 'next-translate/useTranslation';
 import {
   useState,
   SetStateAction,
@@ -62,6 +63,7 @@ const FileInputBase: ForwardRefRenderFunction<
   },
   ref
 ) => {
+  const { t } = useTranslation();
   const toast = useToast();
   const [progress, setProgress] = useState(0);
   const [isSending, setIsSending] = useState(false);
@@ -113,8 +115,8 @@ const FileInputBase: ForwardRefRenderFunction<
         if (err?.message === 'Cancelled image upload.') return;
 
         toast({
-          title: 'Falha no envio',
-          description: 'Ocorreu um erro ao realizar o upload da sua imagem.',
+          title: t('common:formToastImageErrorTitle'),
+          description: t('common:formToastImageErrorDescription'),
           status: 'error',
           duration: 5000,
           isClosable: true,
@@ -176,7 +178,7 @@ const FileInputBase: ForwardRefRenderFunction<
                   <CircularProgressLabel>{progress}%</CircularProgressLabel>
                 </CircularProgress>
                 <Text as="span" pt={2} textAlign="center">
-                  Enviando...
+                  {t('common:modalImageSending')}
                 </Text>
               </>
             ) : (
@@ -203,7 +205,7 @@ const FileInputBase: ForwardRefRenderFunction<
                 >
                   <Icon as={FiPlus} w={14} h={14} />
                   <Text as="span" pt={2} textAlign="center">
-                    Adicione sua imagem
+                    {t('common:modalImageInput')}
                   </Text>
                 </Flex>
               </Box>

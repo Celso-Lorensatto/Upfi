@@ -10,6 +10,7 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
 import { FormEvent, ReactEventHandler } from 'react';
 import { TextInput } from '../Input/TextInput';
 
@@ -24,6 +25,7 @@ export function ModalViewImage({
   onClose,
   imgUrl,
 }: ModalViewImageProps): JSX.Element {
+  const { t } = useTranslation();
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay bgColor="#00000087" />
@@ -40,7 +42,7 @@ export function ModalViewImage({
           bg="#353431"
         >
           <Link _focus={{ outline: 'none' }} href={imgUrl}>
-            Abrir original
+            {t('common:imageDirectLink')}
           </Link>
           <Flex alignContent="center" alignItems="center">
             <TextInput
@@ -70,7 +72,7 @@ export function ModalViewImage({
                   elem.value = imgUrl;
                   document.body.appendChild(elem);
                   elem.select();
-                  window.prompt('Copy to clipboard: Ctrl+C, Enter', imgUrl);
+                  window.prompt(t('common:clipboardMobilePrompt'), imgUrl);
                   document.body.removeChild(elem);
                 } else {
                   navigator.clipboard.writeText(imgUrl);

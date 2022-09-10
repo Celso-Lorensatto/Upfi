@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 
+import useTranslation from 'next-translate/useTranslation';
 import { api } from '../../services/api';
 import { FileInput } from '../Input/FileInput';
 import { TextInput } from '../Input/TextInput';
@@ -22,34 +23,35 @@ interface imageMutationProps {
 }
 
 export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
+  const { t } = useTranslation();
   const [imageUrl, setImageUrl] = useState('');
   const [localImageUrl, setLocalImageUrl] = useState('');
   const toast = useToast();
 
   const formValidations = {
     image: {
-      required: 'Arquivo obrigatório',
+      required: t('common:formImageRequiredError'),
       validate: {
         lessThan10MB: file =>
-          file[0].size < 10000000 || 'O arquivo deve ser menor que 10MB',
+          file[0].size < 10000000 || t('common:formInvalidImageSize'),
         acceptedFormats: file =>
           !!file[0].name.match(/png|jpeg|jpg|gif/i) ||
-          'Somente são aceitos arquivos PNG, JPEG e GIF',
+          t('common:formInvalidImageType'),
       },
     },
     title: {
-      required: 'Título obrigatório',
+      required: t('common:formTitleRequiredError'),
       minLength: {
         value: 2,
-        message: 'mínimo de 2 caracteres',
+        message: t('common:formTitleInvalidMinLength'),
       },
-      maxLength: { value: 20, message: 'Máximo de 20 caracteres' },
+      maxLength: { value: 20, message: t('common:formTitleInvalidMaxLength') },
     },
     description: {
-      required: 'Descrição obrigatório',
+      required: t('common:formDescriptiopnRequiredError'),
       maxLength: {
         value: 65,
-        message: 'Máximo de 65 caracteres',
+        message: t('common:formDescriptionInvalidMaxLength'),
       },
     },
   };
@@ -76,17 +78,16 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
       if (!imageUrl) {
         toast({
           status: 'error',
-          title: 'Imagem não adicionada',
-          description:
-            'É preciso adicionar e aguardar o upload de uma imagem antes de realizar o cadastro.',
+          title: t('common:formToastImageNullErrorTitle'),
+          description: t('common:formToastImageNullErrorDescription'),
           isClosable: true,
         });
       }
       await mutation.mutateAsync({ data, img: imageUrl });
       toast({
         status: 'success',
-        title: 'Imagem cadastrada!',
-        description: 'Sua imagem foi cadastrada com sucesso.',
+        title: t('common:formToastImageSuccessTitle'),
+        description: t('common:formToastImageSuccessDescription'),
       });
     } catch (err) {
       toast({
@@ -117,14 +118,14 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
         <TextInput
           name="title"
           {...register('title', formValidations.title)}
-          placeholder="Título da imagem..."
+          placeholder={t('common:modalTitleInput')}
           error={errors.title}
         />
 
         <TextInput
           name="description"
           {...register('description', formValidations.description)}
-          placeholder="Descrição da imagem..."
+          placeholder={t('common:modalDescriptionInput')}
           error={errors.description}
         />
       </Stack>
@@ -137,7 +138,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
         w="100%"
         py={6}
       >
-        Enviar
+        {t('common:modalSubmitButton')}
       </Button>
     </Box>
   );

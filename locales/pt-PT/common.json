@@ -1,0 +1,17 @@
+{
+  "imageButton": "Adicionar Imagem",
+  "imageDirectLink": "Abrir original",
+  "ImageModalTitle": "Nova Imagem",
+  "modalImageInput": "Adicione sua imagem",
+  "modalTitleInput": "Título da  imagem...",
+  "modalDescriptionInput": "Descrição da imagem...",
+  "modalSubmitButton": "Enviar",
+  "formImageRequiredError": "Arquivo obrigatório",
+  "formInvalidImageSize": "o arquivo deve ser menor que  10MB",
+  "formInvalidImageType": "Somente são aceitos arquivos PNG, JPEG e GIF",
+  "formTitleRequiredError": "Título obrigátório",
+  "formTitleInvalidMinLength": "Mínimo de 2 caracteres",
+  "formTitleInvalidMaxLength": "Máximo de 20 caracteres",
+  "formDescriptiopnRequiredError": "Descrição obrigatória",
+  "formDescriptionInvalidMaxLength": "Máximo de 65 caracteres"
+}

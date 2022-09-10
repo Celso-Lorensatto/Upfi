@@ -6,6 +6,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
 
 import { FormAddImage } from '../Form/FormAddImage';
 
@@ -18,6 +19,7 @@ export function ModalAddImage({
   isOpen,
   onClose,
 }: ModalAddImageProps): JSX.Element {
+  const { t } = useTranslation();
   const handleCloseModal = (): void => {
     onClose();
   };
@@ -26,7 +28,9 @@ export function ModalAddImage({
     <Modal isOpen={isOpen} onClose={handleCloseModal} isCentered size="4xl">
       <ModalOverlay />
       <ModalContent bgColor="pGray.900">
-        <ModalHeader fontSize={['2xl', '4xl']}>Nova imagem</ModalHeader>
+        <ModalHeader fontSize={['2xl', '4xl']}>
+          {t('common:modalAddImageName')}
+        </ModalHeader>
 
         <ModalCloseButton />
 

@@ -5364,6 +5364,11 @@ next-connect@^0.10.1:
   dependencies:
     trouter "^3.1.0"
 
+next-translate@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/next-translate/-/next-translate-1.5.0.tgz#b1e5c4a8e55e31b3ed1b9428529f27c289c6b7bc"
+  integrity sha512-6amnuJWw22XbaM2DVhsYaOXelFLjTbMqTgqvB+h9VfE/H2aQ/edfT06ONQLQbsVV/I7Hn+93LTaV1/qOo6Kf9A==
+
 next@10.0.9:
   version "10.0.9"
   resolved "https://registry.yarnpkg.com/next/-/next-10.0.9.tgz#ad5d8e0368fee8363cdfd64d22dfbf71f683ae66"

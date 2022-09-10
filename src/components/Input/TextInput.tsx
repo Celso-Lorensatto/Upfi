@@ -21,6 +21,7 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   ref
 ) => {
   const [mobile] = useMediaQuery('(max-width:33em)');
+
   return (
     <FormControl
       display="flex"

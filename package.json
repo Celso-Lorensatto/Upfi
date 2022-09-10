@@ -20,6 +20,7 @@
     "multer": "^1.4.2",
     "next": "10.0.9",
     "next-connect": "^0.10.1",
+    "next-translate": "^1.5.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.0.7",

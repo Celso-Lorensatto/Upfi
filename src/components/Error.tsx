@@ -1,6 +1,9 @@
 import { Button, Heading, Flex } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
 
 export function Error(): JSX.Element {
+  const { t } = useTranslation();
+
   return (
     <Flex
       justifyContent="center"
@@ -8,9 +11,9 @@ export function Error(): JSX.Element {
       h="100vh"
       flexDir="column"
     >
-      <Heading>Infelizmente ocorreu um erro =(</Heading>
+      <Heading>{t('common:applicationError')}</Heading>
       <Button py={6} onClick={() => window.location.reload()} mt={4}>
-        Clique aqui para tentar novamente
+        {t('common:applicationErrorReloadButton')}
       </Button>
     </Flex>
   );

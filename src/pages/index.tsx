@@ -2,6 +2,7 @@ import { Button, Box, HStack } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { useInfiniteQuery } from 'react-query';
 
+import useTranslation from 'next-translate/useTranslation';
 import { Header } from '../components/Header';
 import { CardList } from '../components/CardList';
 import { Loading } from '../components/Loading';
@@ -31,6 +32,8 @@ export default function Home(): JSX.Element {
       },
     }
   );
+
+  const { t } = useTranslation();
 
   type Card = {
     title: string;
@@ -73,7 +76,9 @@ export default function Home(): JSX.Element {
         {!isLoading && !isError && <CardList cards={formattedData} />}
         {hasNextPage ? (
           <Button marginTop="2rem" onClick={fetchNextPage} type="button">
-            {isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}
+            {isFetchingNextPage
+              ? t('common:applicationButtonLoadingMoreImages')
+              : t('common:applicationButtonLoadMoreImages')}
           </Button>
         ) : (
           ''
