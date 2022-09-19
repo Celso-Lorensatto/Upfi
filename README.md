@@ -8,4 +8,4 @@ Builded with:
 - Next
 - Chakra-ui
 
-Check it out : https://upfi-theta.vercel.app/
+Check it out : https://upfi.celsolorensatto.dev
